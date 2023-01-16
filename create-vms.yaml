@@ -7,7 +7,7 @@
     - alu0101225562ull.yaml
 
   vars:
-    ssh_keys: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8dUcTjrGHN1MYT2SvPe6JlmY7R8cw3glMEkGM3TNwOQEEWGkGPSy/9YXDENozK8Yc2WQRzYw0yWaOfAVUBKJSvGztRxh6kQGgM7Jv3hPvpq6f+m2FHAo8pkJXHYWJe/0Z+mp8tKYSBB5Gijvkfym4NXG5Pr4jyF2WgaxPZ+I2m1lOI+lNtTS9EXGN/hWFS2bBQQJ2+jHmnU6gZRt3I9IKSTkCP6BFoDRIJLaJ4QYDCU3/RroYcyENHZwj1Bo89xVQDj8CFK2G0nwPKlAtvMqjviKad978bKUR8LulnnothmNevJnflLyS4jybJv8JXhpPrDMkQ16q3BsZ8/t2NOC8D6FpMHYkdQAT42gnsWgulV/yVeiOtYjs+yhbDCUk7ft/55kWVtW0YJZdmFV2cCsfrd6fGnnl+15lZ3lQZ3O+i4TEeSrjieJOUIQwDayi2RFoYQ/OSE60vmSZ5y4/0wMhkOQ3IfSal/r0MrCfHthH4ETJ7RYSY7bkNEGRAlAwRRc= usuario@ubuntu
+    ssh_keys: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD4bhDNmUNkH/b9Ami9Ij6wdvcwcJWvGfx9oIxo50XQTUJ8a2ooIrjMnP0YjXVSXyArPa/eVxNBla/wnZw/ZZTJuAJH4M1wsDUPUKkKTQAW5cG3SmnAd9IiD+Y4Z0wef06C4uvtEsuJECQ+bKw56SDzRLsJkIeOGiYGDrs4R4z9A9BS0oiG/7p9a69c4KcT9P+PLXMO70nyNqNIgqxCrHqhLhn5i6svgiU7VLZNksar/gfobaiZmIFFU1obNpeMhFQhkV4VLmi4Mt/OBBLTf4GnqAIR7hi0cdRBuOSO4/fJGNSEyrnIhgTRi8IeZkQ0Q/6WRja6gaX6ExRcFFagSQOSJtNyVwApzmPlZJWVtmwY/GKziFVutmWdRlp8Mv9Z74skZz5lKEm8zy6H1HxjZva+69wPaeQlx0ck79CncccR/6Wu6AvHX20RINpElUSvK6I0qmZn71jcFgS6CQpQfCMmVOP7eoK+DeSAdpm6qEODtsOg/Xbl5yjckH5SaoNorxh0Z2xcM9KOn7LCQA2UbSOwkIEnNidn1GY3zIXwYC68BFxFc2nw1IkfRLifKdJGF4GMw3ouJ0JTlnOjpcPKL0LDAfgB1sV/By1OucmNMv9QZPpMGBrY8H9TkgheIEr2MQ2sdYaeTIan0ja0X+CqgSlET6Dab6gqD4l7ygIeZR7c/Q== usuario@ubuntu
 # Usuario IaaS (cambiar vblanco por aluxxx...)
 
     ovirt_login: alu0101225562@ULL
@@ -19,14 +19,14 @@
 # Nodos a crear (en este caso dos ovejas)
 
     nodes:
-      - name: ansible
+      - name: dev1
 
 # Especifiquen aqui el perfil de la red privada
 # que tienen asignada
 
     node_nics: 
-      - name: nic4
-        profile_name: DOCP2P-4023
+      - name: nic2
+        profile_name: DOCP2P-4021
 
 # Tareas
 # ------

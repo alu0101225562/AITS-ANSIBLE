@@ -1,0 +1,5 @@
+---
+- hosts: mongo3
+  become: true
+  roles:
+    - mongodb-deployment

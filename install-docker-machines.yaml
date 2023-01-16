@@ -1,0 +1,60 @@
+---
+- hosts: docker
+  become: true
+
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name:
+          - docker
+          - docker.io
+          - docker-compose
+          - docker-registry
+        state: latest
+        update_cache: true
+
+    - name: Ensure pip is installed
+      package:
+        name: python3-pip
+        state: present
+
+    - name: Install Python's docker module
+      pip:
+        name: docker
+        state: present
+
+    - name: users | adding docker users (for use without sudo)
+      user:
+        name: ansible
+        append: yes
+        groups: docker
+      become: true

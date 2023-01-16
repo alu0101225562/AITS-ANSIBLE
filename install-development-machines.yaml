@@ -1,0 +1,85 @@
+---
+- hosts: dev
+  become: true
+
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name:
+          - docker
+          - docker.io
+          - docker-compose
+          - docker-registry
+        state: latest
+        update_cache: true
+
+    - name: Ensure pip is installed
+      package:
+        name: python3-pip
+        state: present
+
+    - name: Install Python's docker module
+      pip:
+        name: docker
+        state: present
+
+    - name: users | adding docker users (for use without sudo)
+      user:
+        name: ansible
+        append: yes
+        groups: docker
+      become: true
+
+    - name: "Install apt packages for development"
+      become: true
+      package:
+        state: present
+        name:
+          - "curl"
+          - "git"
+          
+    - name: Checking if Volta is installed
+      command: which volta
+      changed_when: false
+      failed_when: volta_installed.rc not in [0,1]
+      register: volta_installed
+    - when: volta_installed.rc not in [ 0 ]
+      block:
+        - name: Download Volta install script
+          ansible.builtin.get_url:
+            url: https://get.volta.sh
+            dest: /tmp/volta.sh
+            mode: 0755
+        - name: "Install Volta"
+          command: /tmp/volta.sh
+        - name: "Install Node LTS"
+          command: /home/ansible/.volta/bin/volta install node@lts
