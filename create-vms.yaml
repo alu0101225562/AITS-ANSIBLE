@@ -19,14 +19,14 @@
 # Nodos a crear (en este caso dos ovejas)
 
     nodes:
-      - name: dev1
+      - name: mongodb-4
 
 # Especifiquen aqui el perfil de la red privada
 # que tienen asignada
 
     node_nics: 
-      - name: nic2
-        profile_name: DOCP2P-4021
+      - name: nic3
+        profile_name: DOCP2P-4022
 
 # Tareas
 # ------
